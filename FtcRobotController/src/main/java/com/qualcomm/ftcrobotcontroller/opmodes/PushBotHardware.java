@@ -162,7 +162,7 @@ public class PushBotHardware extends OpMode
     /**
      * Access whether a warning has been generated.
      */
-    boolean a_warning_generated ()
+    public boolean a_warning_generated()
 
     {
         return v_warning_generated;
@@ -176,7 +176,7 @@ public class PushBotHardware extends OpMode
     /**
      * Access the warning message.
      */
-    String a_warning_message ()
+    public String a_warning_message()
 
     {
         return v_warning_message;
@@ -324,7 +324,7 @@ public class PushBotHardware extends OpMode
     /**
      * Access the left drive motor's power level.
      */
-    double a_left_drive_power ()
+    public double a_left_drive_power()
     {
         double l_return = 0.0;
 
@@ -344,7 +344,7 @@ public class PushBotHardware extends OpMode
     /**
      * Access the right drive motor's power level.
      */
-    double a_right_drive_power ()
+    public double a_right_drive_power()
     {
         double l_return = 0.0;
 
@@ -561,7 +561,7 @@ public class PushBotHardware extends OpMode
     /**
      * Access the left encoder's count.
      */
-    int a_left_encoder_count ()
+    public int a_left_encoder_count()
     {
         int l_return = 0;
 
@@ -581,7 +581,7 @@ public class PushBotHardware extends OpMode
     /**
      * Access the right encoder's count.
      */
-    int a_right_encoder_count ()
+    public int a_right_encoder_count()
 
     {
         int l_return = 0;
@@ -873,7 +873,7 @@ public class PushBotHardware extends OpMode
     /**
      * Access the left arm motor's power level.
      */
-    double a_left_arm_power ()
+    public double a_left_arm_power()
     {
         double l_return = 0.0;
 
@@ -909,7 +909,7 @@ public class PushBotHardware extends OpMode
     /**
      * Access the hand position.
      */
-    double a_hand_position ()
+    public double a_hand_position()
     {
         double l_return = 0.0;
 

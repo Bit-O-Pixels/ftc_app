@@ -49,27 +49,26 @@ public class K9TankDrive extends OpMode {
 	 * Also, as the claw servo approaches 0, the claw opens up (drops the game element).
 	 */
     // TETRIX VALUES.
-    final static double ARM_MIN_RANGE  = 0.20;
-    final static double ARM_MAX_RANGE  = 0.90;
-    final static double CLAW_MIN_RANGE  = 0.20;
-    final static double CLAW_MAX_RANGE  = 0.7;
+   // final static double ARM_MIN_RANGE  = 0.20;
+    //final static double ARM_MAX_RANGE  = 0.90;
+    //final static double CLAW_MIN_RANGE  = 0.20;
+    //final static double CLAW_MAX_RANGE  = 0.7;
 
 	// position of the arm servo.
-	double armPosition;
+	//double armPosition;
 
 	// amount to change the arm servo position.
-	double armDelta = 0.1;
+	//double armDelta = 0.1;
 
 	// position of the claw servo
-	double clawPosition;
+	//double clawPosition;
 
-	// amount to change the claw servo position by
-	double clawDelta = 0.1;
 
-	DcMotor motorRight;
-	DcMotor motorLeft;
-	Servo claw;
-	Servo arm;
+
+	DcMotor right_front_motor;
+	DcMotor left_front_motor;
+	//Servo claw;
+	//Servo arm;
 
 	/**
 	 * Constructor
@@ -101,16 +100,16 @@ public class K9TankDrive extends OpMode {
 		 *    "servo_1" controls the arm joint of the manipulator.
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
-		motorRight = hardwareMap.dcMotor.get("motor_2");
-		motorLeft = hardwareMap.dcMotor.get("motor_1");
-		motorLeft.setDirection(DcMotor.Direction.REVERSE);
+		right_front_motor = hardwareMap.dcMotor.get("motor_2");
+		left_front_motor = hardwareMap.dcMotor.get("motor_1");
+		left_front_motor.setDirection(DcMotor.Direction.REVERSE);
 
-		arm = hardwareMap.servo.get("servo_1");
-		claw = hardwareMap.servo.get("servo_6");
+		//arm = hardwareMap.servo.get("servo_1");
+		//claw = hardwareMap.servo.get("servo_6");
 
 		// assign the starting position of the wrist and claw
-		armPosition = 0.2;
-		clawPosition = 0.2;
+		//armPosition = 0.2;
+		//clawPosition = 0.2;
 	}
 
 	/*
@@ -143,94 +142,32 @@ public class K9TankDrive extends OpMode {
 		left =  (float)scaleInput(left);
 
 		// write the values to the motors
-		motorRight.setPower(right);
-		motorLeft.setPower(left);
-
-		// update the position of the arm.
-		if (gamepad1.a) {
-			// if the A button is pushed on gamepad1, increment the position of
-			// the arm servo.
-			armPosition += armDelta;
-		}
-
-		if (gamepad1.y) {
-			// if the Y button is pushed on gamepad1, decrease the position of
-			// the arm servo.
-			armPosition -= armDelta;
-		}
-
-        // update the position of the claw
-        if (gamepad1.left_bumper) {
-            clawPosition += clawDelta;
-        }
-
-        if (gamepad1.left_trigger > 0.25) {
-            clawPosition -= clawDelta;
-        }
-
-        if (gamepad1.b) {
-            clawPosition -= clawDelta;
-        }
-
-		// update the position of the claw
-		if (gamepad1.x) {
-			clawPosition += clawDelta;
-		}
-
-		if (gamepad1.b) {
-			clawPosition -= clawDelta;
-		}
-
-		// clip the position values so that they never exceed their allowed range.
-		armPosition = Range.clip(armPosition, ARM_MIN_RANGE, ARM_MAX_RANGE);
-		clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
-
-		// write position values to the wrist and claw servo
-		arm.setPosition(armPosition);
-		claw.setPosition(clawPosition);
-
-		/*
-		 * Send telemetry data back to driver station. Note that if we are using
-		 * a legacy NXT-compatible motor controller, then the getPower() method
-		 * will return a null value. The legacy NXT-compatible motor controllers
-		 * are currently write only.
-		 */
+		right_front_motor.setPower(right);
+		left_front_motor.setPower(left);
 
 		telemetry.addData("Text", "*** Robot Data***");
-        telemetry.addData("arm", "arm:  " + String.format("%.2f", armPosition));
-        telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
+
 		telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
 		telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
 	}
 
-	/*
-	 * Code to run when the op mode is first disabled goes here
-	 *
-	 * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#stop()
-	 */
 	@Override
 	public void stop() {
 
 	}
 
-	/*
-	 * This method scales the joystick input so for low joystick values, the
-	 * scaled value is less than linear.  This is to make it easier to drive
-	 * the robot more precisely at slower speeds.
-	 */
 	double scaleInput(double dVal)  {
 		double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
 				0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
 
-		// get the corresponding index for the scaleInput array.
+
 		int index = (int) (dVal * 16.0);
 
-		// index should be positive.
+
 		if (index < 0) {
 			index = -index;
 		}
 
-		// index cannot exceed size of array minus 1.
 		if (index > 16) {
 			index = 16;
 		}

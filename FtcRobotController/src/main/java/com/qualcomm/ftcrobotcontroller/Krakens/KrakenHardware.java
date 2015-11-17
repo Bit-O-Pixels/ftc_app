@@ -83,20 +83,20 @@ public class KrakenHardware extends OpMode
         try
         {
             v_left_front_drive = hardwareMap.dcMotor.get ("right_front_drive");
-            v_left_front_drive.setDirection(DcMotor.Direction.REVERSE);
+            //v_left_front_drive.setDirection(DcMotor.Direction.FORWARD);
         }
         catch (Exception p_exeception)
         {
             m_warning_message ("right_front_drive");
             DbgLog.msg (p_exeception.getLocalizedMessage ());
 
-            v_left_front_drive = null;
+            v_right_front_drive = null;
         }
 
         try
         {
-            v_right_front_drive = hardwareMap.dcMotor.get ("motor_left_drive");
-            v_right_front_drive.setDirection(DcMotor.Direction.REVERSE);
+            v_right_front_drive = hardwareMap.dcMotor.get ("left_front_drive");
+            //v_right_front_drive.setDirection(DcMotor.Direction.REVERSE);
         }
         catch (Exception p_exeception)
         {
@@ -108,34 +108,34 @@ public class KrakenHardware extends OpMode
 
         try
         {
-            v_left_rear_drive = hardwareMap.dcMotor.get ("right_front_drive");
-            v_left_rear_drive.setDirection(DcMotor.Direction.REVERSE);
+            v_right_rear_drive = hardwareMap.dcMotor.get ("right_rear_drive");
+            //v_left_rear_drive.setDirection(DcMotor.Direction.REVERSE);
         }
         catch (Exception p_exeception)
         {
-            m_warning_message ("right_front_drive");
-            DbgLog.msg (p_exeception.getLocalizedMessage ());
-
-            v_left_rear_drive = null;
-        }
-
-        try
-        {
-            v_right_rear_drive = hardwareMap.dcMotor.get ("left_front_drive");
-            v_right_rear_drive.setDirection(DcMotor.Direction.REVERSE);
-        }
-        catch (Exception p_exeception)
-        {
-            m_warning_message ("left_front_drive");
+            m_warning_message ("right_rear_drive");
             DbgLog.msg (p_exeception.getLocalizedMessage ());
 
             v_right_rear_drive = null;
         }
 
+        try
+        {
+            v_left_rear_drive = hardwareMap.dcMotor.get ("left_rear_drive");
+            //v_right_rear_drive.setDirection(DcMotor.Direction.REVERSE);
+        }
+        catch (Exception p_exeception)
+        {
+            m_warning_message ("left_rear_drive");
+            DbgLog.msg (p_exeception.getLocalizedMessage ());
+
+            v_left_rear_drive = null;
+        }
+
         //
         // Connect the arm motor.
         //
-        try
+        /*try
         {
             v_motor_left_arm = hardwareMap.dcMotor.get ("left_arm");
         }
@@ -145,7 +145,7 @@ public class KrakenHardware extends OpMode
             DbgLog.msg (p_exeception.getLocalizedMessage ());
 
             v_motor_left_arm = null;
-        }
+        }*/
 
         //
         // Connect the servo motors.
@@ -153,7 +153,7 @@ public class KrakenHardware extends OpMode
         // Indicate the initial position of both the left and right servos.  The
         // hand should be halfway opened/closed.
         //
-        double l_hand_position = 0.5;
+        /*double l_hand_position = 0.5;
 
         try
         {
@@ -179,7 +179,7 @@ public class KrakenHardware extends OpMode
             DbgLog.msg (p_exeception.getLocalizedMessage ());
 
             v_servo_right_hand = null;
-        }
+        }*/
 
     } // init
 
@@ -407,7 +407,7 @@ public class KrakenHardware extends OpMode
             v_right_front_drive.setPower (p_right_power);
         }
         if(v_right_rear_drive != null) {
-            v_right_rear_drive.setPower (p_left_power);
+            v_right_rear_drive.setPower (p_right_power);
         }
 
     } // set_drive_power

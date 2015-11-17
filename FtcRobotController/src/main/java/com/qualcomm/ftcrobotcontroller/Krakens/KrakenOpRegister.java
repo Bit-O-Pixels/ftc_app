@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.Krakens;
 
+import com.qualcomm.ftcrobotcontroller.opmodes.K9TankDrive;
 import com.qualcomm.ftcrobotcontroller.opmodes.K9TeleOp;
 import com.qualcomm.ftcrobotcontroller.opmodes.MatrixK9TeleOp;
 import com.qualcomm.ftcrobotcontroller.opmodes.NullOp;

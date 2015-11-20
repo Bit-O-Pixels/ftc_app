@@ -1,16 +1,23 @@
 package com.qualcomm.ftcrobotcontroller.Krakens;
 
-import com.qualcomm.robotcore.hardware.GyroSensor;
+//------------------------------------------------------------------------------
+//
+// PushBotAuto
+//
 
-public class KrakenAuto extends KrakenTelementry
+/**
+ * Provide a basic autonomous operational mode that uses the left and right
+ * drive motors and associated encoders implemented using a state machine for
+ * the Push Bot.
+ *
+ * @author SSI Robotics
+ * @version 2015-08-01-06-01
+ */
+public class KrakenGyroTest extends KrakenTelementry
 
 {
 
-    final int wheelRotation = 1120*2;
-    final int circum = (int) Math.round(8*Math.PI); // in inches
-    final int encoderInch = wheelRotation/circum;
-    GyroSensor sensorGyro;
-    int rot = 0;
+    final int motorRotation = 1120;
 
     //--------------------------------------------------------------------------
     //
@@ -21,7 +28,7 @@ public class KrakenAuto extends KrakenTelementry
      *
      * The system calls this member when the class is instantiated.
      */
-    public KrakenAuto()
+    public KrakenGyroTest()
 
     {
         //
@@ -33,9 +40,7 @@ public class KrakenAuto extends KrakenTelementry
         // Initialize class members.
         //
         // All via self-construction.
-        // write some device information (connection info, name and type)
-        // to the log file.
-        hardwareMap.logDevices();
+
     } // PushBotAuto
 
     //--------------------------------------------------------------------------
@@ -47,7 +52,6 @@ public class KrakenAuto extends KrakenTelementry
      *
      * The system calls this member once when the OpMode is enabled.
      */
-    boolean go = false;
     @Override public void start ()
 
     {
@@ -60,8 +64,6 @@ public class KrakenAuto extends KrakenTelementry
         // Reset the motor encoders on the drive wheels.
         //
         reset_drive_encoders ();
-        sensorGyro = hardwareMap.gyroSensor.get("gyro");
-        v_state = 0;
 
     } // start
 
@@ -79,24 +81,10 @@ public class KrakenAuto extends KrakenTelementry
     @Override public void loop ()
 
     {
+        //----------------------------------------------------------------------
         //
-        // Send telemetry data to the driver station.
+        // State: Initialize (i.e. state_0).
         //
-        update_telemetry(); // Update common telemetry
-        if(!go){
-            sensorGyro.calibrate();
-            go = true;
-            v_state = 0;
-        }
-        if(sensorGyro.isCalibrating()){
-            telemetry.addData("17", "Calibrating");
-            v_state = 0;
-            return; // Kill if calibrating
-        }
-        rot = sensorGyro.getHeading();
-        telemetry.addData ("18", "State: " + v_state);
-        telemetry.addData("17", "rotation: " + rot);
-
         switch (v_state)
         {
         //
@@ -125,8 +113,10 @@ public class KrakenAuto extends KrakenTelementry
             //
             run_using_encoders ();
 
-            //Test rotation
-            set_drive_power(-0.25, -0.25);
+            //
+            // Start the drive wheel motors at full power.
+            //
+            set_drive_power (1.0f, 1.0f);
 
             //
             // Have the motor shafts turned the required amount?
@@ -134,7 +124,7 @@ public class KrakenAuto extends KrakenTelementry
             // If they haven't, then the op-mode remains in this state (i.e this
             // block will be executed the next time this method is called).
             //
-            if (rot >= 84)
+            if (have_drive_encoders_reached (motorRotation*2, motorRotation*2))
             {
                 //
                 // Reset the encoders to ensure they are at a known good value.
@@ -162,25 +152,50 @@ public class KrakenAuto extends KrakenTelementry
                 v_state++;
             }
             break;
-            case 3:
-                run_using_encoders ();
-                set_drive_power (0.25f, -0.25f);
-                if (have_drive_encoders_reached (encoderInch*12, encoderInch*12))
-                {
-                    reset_drive_encoders ();
-                    set_drive_power (0.0f, 0.0f);
-                    v_state++;
-                }
-                break;
-            //
-            // Wait...
-            //
-            case 4:
-                if (have_drive_encoders_reset ())
-                {
-                    v_state++;
-                }
-                break;
+        //
+        // Turn left until the encoders exceed the specified values.
+        //
+        case 3:
+            run_using_encoders ();
+            set_drive_power (-1.0f, 1.0f);
+            if (have_drive_encoders_reached (motorRotation*2, motorRotation*2))
+            {
+                reset_drive_encoders ();
+                set_drive_power (0.0f, 0.0f);
+                v_state++;
+            }
+            break;
+        //
+        // Wait...
+        //
+        case 4:
+            if (have_drive_encoders_reset ())
+            {
+                v_state++;
+            }
+            break;
+        //
+        // Turn right until the encoders exceed the specified values.
+        //
+        case 5:
+            run_using_encoders ();
+            set_drive_power (1.0f, -1.0f);
+            if (have_drive_encoders_reached (motorRotation*2, motorRotation*2))
+            {
+                reset_drive_encoders ();
+                set_drive_power (0.0f, 0.0f);
+                v_state++;
+            }
+            break;
+        //
+        // Wait...
+        //
+        case 6:
+            if (have_drive_encoders_reset ())
+            {
+                v_state++;
+            }
+            break;
         //
         // Perform no action - stay in this case until the OpMode is stopped.
         // This method will still be called regardless of the state machine.
@@ -193,7 +208,11 @@ public class KrakenAuto extends KrakenTelementry
             break;
         }
 
-
+        //
+        // Send telemetry data to the driver station.
+        //
+        update_telemetry (); // Update common telemetry
+        telemetry.addData ("18", "State: " + v_state);
 
     } // loop
 

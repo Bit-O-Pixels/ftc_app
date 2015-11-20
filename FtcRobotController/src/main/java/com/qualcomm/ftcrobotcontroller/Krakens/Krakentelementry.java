@@ -4,9 +4,9 @@ import com.qualcomm.ftcrobotcontroller.opmodes.PushBotHardware;
  * @author SSI Robotics
  * @version 2015-08-02-13-57
  */
-public class Krakentelementry extends KrakenHardware
+public class KrakenTelementry extends KrakenHardware
 {
-    public Krakentelementry()
+    public KrakenTelementry()
     {
     }
     public void update_telemetry ()

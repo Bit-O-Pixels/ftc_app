@@ -153,22 +153,22 @@ public class KrakenHardware extends OpMode
         // Indicate the initial position of both the left and right servos.  The
         // hand should be halfway opened/closed.
         //
-        /*double l_hand_position = 0.5;
+        double l_arm_thing = 0.0;
 
         try
         {
-            v_servo_left_hand = hardwareMap.servo.get ("left_hand");
-            v_servo_left_hand.setPosition (l_hand_position);
+            v_arm_servo_1 = hardwareMap.servo.get ("arm_servo_1");
+            v_arm_servo_1.setPosition (l_arm_thing);
         }
         catch (Exception p_exeception)
         {
-            m_warning_message ("left_hand");
+            m_warning_message ("arm_servo_1");
             DbgLog.msg (p_exeception.getLocalizedMessage ());
 
-            v_servo_left_hand = null;
+            v_arm_servo_1 = null;
         }
 
-        try
+        /*try
         {
             v_servo_right_hand = hardwareMap.servo.get ("right_hand");
             v_servo_right_hand.setPosition (l_hand_position);
@@ -947,10 +947,6 @@ public class KrakenHardware extends OpMode
     {
         double l_return = 0.0;
 
-        if (v_servo_left_hand != null)
-        {
-            l_return = v_servo_left_hand.getPosition ();
-        }
 
         return l_return;
 
@@ -978,16 +974,18 @@ public class KrakenHardware extends OpMode
         // Set the value.  The right hand value must be opposite of the left
         // value.
         //
-        if (v_servo_left_hand != null)
-        {
-            v_servo_left_hand.setPosition (l_position);
-        }
         if (v_servo_right_hand != null)
         {
             v_servo_right_hand.setPosition (1.0 - l_position);
         }
 
     } // m_hand_position
+
+    void set_arm_servo_1 (double pos) {
+        try {
+            v_arm_servo_1.setPosition(Math.max(0.0, Math.min(1.0, pos)));
+        }catch( NullPointerException e){}
+    }
 
     //--------------------------------------------------------------------------
     //
@@ -996,24 +994,6 @@ public class KrakenHardware extends OpMode
     /**
      * Open the hand to its fullest.
      */
-
-    void open_hand ()
-
-    {
-        //
-        // Set the value.  The right hand value must be opposite of the left
-        // value.
-        //
-        if (v_servo_left_hand != null)
-        {
-            v_servo_left_hand.setPosition (Servo.MAX_POSITION);
-        }
-        if (v_servo_right_hand != null)
-        {
-            v_servo_right_hand.setPosition (Servo.MIN_POSITION);
-        }
-
-    } // open_hand
 
     //--------------------------------------------------------------------------
     //
@@ -1080,7 +1060,7 @@ public class KrakenHardware extends OpMode
     /**
      * Manage the aspects of the left hand servo.
      */
-    private Servo v_servo_left_hand;
+    private Servo v_arm_servo_1;
 
     //--------------------------------------------------------------------------
     //

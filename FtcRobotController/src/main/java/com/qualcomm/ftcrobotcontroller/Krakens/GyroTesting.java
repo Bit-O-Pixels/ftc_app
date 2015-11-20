@@ -1,6 +1,6 @@
 package com.qualcomm.ftcrobotcontroller.Krakens;
 
-public class GyroTesting extends Krakentelementry
+public class GyroTesting extends KrakenTelementry
 
 {
 

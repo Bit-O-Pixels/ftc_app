@@ -8,13 +8,22 @@ public class Drive extends KrakenTelementry
                 float l_gp1_right_trigger = gamepad1.right_trigger;
                 float l_gp1_left_joystick = gamepad1.left_stick_x;
                 float l_gp1_right_joystick = gamepad1.right_stick_y;
-                float speed = l_gp1_right_trigger - l_gp1_left_trigger;
-                //Change to use the little joystick
+                boolean l_gp2_button_a = gamepad2.a;//WOW
+                float l_gp2_left_joystick_x = gamepad2.left_stick_x;
+                float l_gp2_left_joystick_y = gamepad2.left_stick_y;
 
+
+                float speed = l_gp1_right_trigger - l_gp1_left_trigger;
+
+                //Arm Math
+                
+
+                //Drive Math
                 double left_speed = Math.min(1.0, Math.max(-1.0, (speed - l_gp1_left_joystick)));
                 double right_speed = -Math.min(1.0, Math.max(-1.0, (speed + l_gp1_left_joystick)));
                 set_arm_servo_1((l_gp1_right_joystick+1)/2);
                 set_drive_power(left_speed,right_speed);
+
                 update_telemetry();
                 telemetry.addData("10", "GP1 Left: " + l_gp1_left_trigger);
                 telemetry.addData("11", "GP1 Right: " + l_gp1_right_trigger);

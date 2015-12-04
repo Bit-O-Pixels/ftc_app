@@ -132,6 +132,54 @@ public class KrakenHardware extends OpMode
             v_left_rear_drive = null;
         }
 
+        try
+        {
+            v_arm_motor_1 = hardwareMap.dcMotor.get ("arm_1");
+            //v_right_rear_drive.setDirection(DcMotor.Direction.REVERSE);
+        }
+        catch (Exception p_exeception)
+        {
+            m_warning_message ("arm_1");
+            DbgLog.msg (p_exeception.getLocalizedMessage ());
+
+            v_arm_motor_1 = null;
+        }
+        try
+        {
+            v_arm_motor_2 = hardwareMap.dcMotor.get ("arm_2");
+            //v_right_rear_drive.setDirection(DcMotor.Direction.REVERSE);
+        }
+        catch (Exception p_exeception)
+        {
+            m_warning_message ("arm_2");
+            DbgLog.msg (p_exeception.getLocalizedMessage ());
+
+            v_arm_motor_2 = null;
+        }
+        try
+        {
+            v_arm_motor_3 = hardwareMap.dcMotor.get ("arm_3");
+            //v_right_rear_drive.setDirection(DcMotor.Direction.REVERSE);
+        }
+        catch (Exception p_exeception)
+        {
+            m_warning_message ("arm_3");
+            DbgLog.msg (p_exeception.getLocalizedMessage ());
+
+            v_arm_motor_3 = null;
+        }
+        try
+        {
+            v_arm_motor_4 = hardwareMap.dcMotor.get ("arm_4");
+            //v_right_rear_drive.setDirection(DcMotor.Direction.REVERSE);
+        }
+        catch (Exception p_exeception)
+        {
+            m_warning_message ("arm_4");
+            DbgLog.msg (p_exeception.getLocalizedMessage ());
+
+            v_arm_motor_4 = null;
+        }
         //
         // Connect the arm motor.
         //
@@ -153,7 +201,7 @@ public class KrakenHardware extends OpMode
         // Indicate the initial position of both the left and right servos.  The
         // hand should be halfway opened/closed.
         //
-        double l_arm_thing = 0.0;
+        double l_arm_thing = 0.5;
 
         try
         {
@@ -166,6 +214,19 @@ public class KrakenHardware extends OpMode
             DbgLog.msg (p_exeception.getLocalizedMessage ());
 
             v_arm_servo_1 = null;
+        }
+
+        try
+        {
+            v_arm_servo_2 = hardwareMap.servo.get ("arm_servo_2");
+            v_arm_servo_2.setPosition (l_arm_thing);
+        }
+        catch (Exception p_exeception)
+        {
+            m_warning_message ("arm_servo_2");
+            DbgLog.msg (p_exeception.getLocalizedMessage ());
+
+            v_arm_servo_2 = null;
         }
 
         /*try
@@ -981,10 +1042,20 @@ public class KrakenHardware extends OpMode
 
     } // m_hand_position
 
-    void set_arm_servo_1 (double pos) {
+    /*void set_arm_servo_1 (double pos) {
         try {
             v_arm_servo_1.setPosition(Math.max(0.0, Math.min(1.0, pos)));
         }catch( NullPointerException e){}
+    }*/
+    void set_arm_servos (double pos1, double pos2){
+        v_arm_servo_1.setPosition(pos1);
+        v_arm_servo_2.setPosition(pos2);
+    }
+    void set_arm_motors(double one, double two, double three, double four) {
+        v_arm_motor_1.setPower(one);
+        v_arm_motor_2.setPower(two);
+        v_arm_motor_3.setPower(three);
+        v_arm_motor_4.setPower(four);
     }
 
     //--------------------------------------------------------------------------
@@ -1061,6 +1132,7 @@ public class KrakenHardware extends OpMode
      * Manage the aspects of the left hand servo.
      */
     private Servo v_arm_servo_1;
+    private Servo v_arm_servo_2;
 
     //--------------------------------------------------------------------------
     //
@@ -1070,5 +1142,10 @@ public class KrakenHardware extends OpMode
      * Manage the aspects of the right hand servo.
      */
     private Servo v_servo_right_hand;
+
+    private DcMotor v_arm_motor_1;
+    private DcMotor v_arm_motor_2;
+    private DcMotor v_arm_motor_3;
+    private DcMotor v_arm_motor_4;
 
 } // PushBotHardware

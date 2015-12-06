@@ -1,41 +1,12 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-//------------------------------------------------------------------------------
-//
-// PushBotAuto
-//
-/**
- * Provide a basic autonomous operational mode that uses the left and right
- * drive motors and associated encoders implemented using a state machine for
- * the Push Bot.
- *
- * @author SSI Robotics
- * @version 2015-08-01-06-01
- */
 public class PushBotAuto extends PushBotTelemetry
 
 {
-    //--------------------------------------------------------------------------
-    //
-    // PushBotAuto
-    //
-    /**
-     * Construct the class.
-     *
-     * The system calls this member when the class is instantiated.
-     */
+
     public PushBotAuto ()
 
     {
-        //
-        // Initialize base classes.
-        //
-        // All via self-construction.
-
-        //
-        // Initialize class members.
-        //
-        // All via self-construction.
 
     } // PushBotAuto
 
@@ -63,50 +34,21 @@ public class PushBotAuto extends PushBotTelemetry
 
     } // start
 
-    //--------------------------------------------------------------------------
-    //
-    // loop
-    //
-    /**
-     * Implement a state machine that controls the robot during auto-operation.
-     * The state machine uses a class member and encoder input to transition
-     * between states.
-     *
-     * The system calls this member repeatedly while the OpMode is running.
-     */
     @Override public void loop ()
 
     {
-        //----------------------------------------------------------------------
-        //
-        // State: Initialize (i.e. state_0).
-        //
+
         switch (v_state)
         {
-        //
-        // Synchronize the state machine and hardware.
-        //
         case 0:
-            //
-            // Reset the encoders to ensure they are at a known good value.
-            //
+
             reset_drive_encoders ();
 
-            //
-            // Transition to the next state when this method is called again.
-            //
             v_state++;
 
-            break;
-        //
-        // Drive forward until the encoders exceed the specified values.
-        //
+
         case 1:
-            //
-            // Tell the system that motor encoders will be used.  This call MUST
-            // be in this state and NOT the previous or the encoders will not
-            // work.  It doesn't need to be in subsequent states.
-            //
+
             run_using_encoders ();
 
             //

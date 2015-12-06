@@ -82,21 +82,8 @@ public class KrakenHardware extends OpMode
 
         try
         {
-            v_left_front_drive = hardwareMap.dcMotor.get ("right_front_drive");
+            v_left_front_drive = hardwareMap.dcMotor.get ("left_front_drive");
             //v_left_front_drive.setDirection(DcMotor.Direction.FORWARD);
-        }
-        catch (Exception p_exeception)
-        {
-            m_warning_message ("right_front_drive");
-            DbgLog.msg (p_exeception.getLocalizedMessage ());
-
-            v_right_front_drive = null;
-        }
-
-        try
-        {
-            v_right_front_drive = hardwareMap.dcMotor.get ("left_front_drive");
-            //v_right_front_drive.setDirection(DcMotor.Direction.REVERSE);
         }
         catch (Exception p_exeception)
         {
@@ -104,6 +91,19 @@ public class KrakenHardware extends OpMode
             DbgLog.msg (p_exeception.getLocalizedMessage ());
 
             v_left_front_drive = null;
+        }
+
+        try
+        {
+            v_right_front_drive = hardwareMap.dcMotor.get ("right_front_drive");
+            //v_right_front_drive.setDirection(DcMotor.Direction.REVERSE);
+        }
+        catch (Exception p_exeception)
+        {
+            m_warning_message ("right_front_drive");
+            DbgLog.msg (p_exeception.getLocalizedMessage ());
+
+            v_right_front_drive = null;
         }
 
         try
@@ -455,7 +455,7 @@ public class KrakenHardware extends OpMode
      */
     void set_drive_power (double p_left_power, double p_right_power)
 
-    {
+        {
         if (v_left_front_drive != null)
         {
             v_left_front_drive.setPower (p_left_power);
@@ -465,13 +465,33 @@ public class KrakenHardware extends OpMode
         }
         if (v_right_front_drive != null)
         {
-            v_right_front_drive.setPower (p_right_power);
+            v_right_front_drive.setPower (-p_right_power);
         }
         if(v_right_rear_drive != null) {
-            v_right_rear_drive.setPower (p_right_power);
+            v_right_rear_drive.setPower (-p_right_power);
         }
 
     } // set_drive_power
+    void set_front_drive_power (double p_front_power, double p_rear_power)
+
+    {
+        if (v_left_front_drive != null)
+        {
+            v_left_front_drive.setPower (p_front_power);
+        }
+        if(v_left_rear_drive != null) {
+            v_left_rear_drive.setPower (p_front_power);
+        }
+        if (v_right_front_drive != null)
+        {
+            v_right_front_drive.setPower (p_rear_power);
+        }
+        if(v_right_rear_drive != null) {
+            v_right_rear_drive.setPower (p_rear_power);
+        }
+
+    }
+
 
     //--------------------------------------------------------------------------
     //
@@ -1056,6 +1076,13 @@ public class KrakenHardware extends OpMode
         v_arm_motor_2.setPower(two);
         v_arm_motor_3.setPower(three);
         v_arm_motor_4.setPower(four);
+    }
+
+    boolean have_arm_encoders_reached(double pos1, double pos2, double pos3, double pos4){
+        return Math.abs(v_arm_motor_1.getCurrentPosition()) >= pos1&&
+                Math.abs(v_arm_motor_2.getCurrentPosition()) >= pos2&&
+                Math.abs(v_arm_motor_3.getCurrentPosition()) >= pos3&&
+                Math.abs(v_arm_motor_4.getCurrentPosition()) >= pos4;
     }
 
     //--------------------------------------------------------------------------

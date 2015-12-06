@@ -44,10 +44,9 @@ public class Drive extends KrakenTelementry
                 }
                 double bucketPos = 0.5 - (l_gp2_left_trigger/2);
 
-
                 //Drive Math
-                double left_speed = Math.min(1.0, Math.max(-1.0, (speed - l_gp1_left_joystick)));
-                double right_speed = -Math.min(1.0, Math.max(-1.0, (speed + l_gp1_left_joystick)));
+                double left_speed = Math.min(1.0, Math.max(-1.0, (speed + l_gp1_left_joystick)));
+                double right_speed = Math.min(1.0, Math.max(-1.0, (speed - l_gp1_left_joystick)));
 
                 set_drive_power(left_speed,right_speed);
                 //bottom-x, bottom-y, upper-y, bucket-y

@@ -22,9 +22,9 @@ public class Drive extends KrakenTelementry
 
                 //0.0 1.0
                 // -1.0, 0.0 and 1.0
-                float upperBaseSpeed = 0.45f;
+                float upperBaseSpeed = 0.25f;
                 float upperSpeed = 0.0f;
-                float bucketBaseSpeed = 0.2f;
+                float bucketBaseSpeed = 0.15f;
                 float bucketSpeed = 0.0f;
 
                 //Arm Math
@@ -50,7 +50,7 @@ public class Drive extends KrakenTelementry
 
                 set_drive_power(left_speed,right_speed);
                 //bottom-x, bottom-y, upper-y, bucket-y
-                set_arm_motors(l_gp2_right_joystick_x/10, l_gp2_right_joystick_y/10, upperSpeed, bucketSpeed);
+                set_arm_motors(upperSpeed, bucketSpeed);
                 set_arm_servo(bucketPos);
                 //set_arm_servos
                 update_telemetry();

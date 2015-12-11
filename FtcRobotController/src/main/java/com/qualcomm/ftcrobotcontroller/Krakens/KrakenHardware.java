@@ -1067,9 +1067,9 @@ public class KrakenHardware extends OpMode
             v_arm_servo_1.setPosition(Math.max(0.0, Math.min(1.0, pos)));
         }catch( NullPointerException e){}
     }*/
-    void set_arm_servos (double pos1, double pos2){
+    void set_arm_servo (double pos1){
         v_arm_servo_1.setPosition(pos1);
-        v_arm_servo_2.setPosition(pos2);
+        //v_arm_servo_2.setPosition(pos2);
     }
     void set_arm_motors(double one, double two, double three, double four) {
         v_arm_motor_1.setPower(one);

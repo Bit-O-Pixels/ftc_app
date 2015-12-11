@@ -50,8 +50,8 @@ public class Drive extends KrakenTelementry
 
                 set_drive_power(left_speed,right_speed);
                 //bottom-x, bottom-y, upper-y, bucket-y
-                set_arm_motors(l_gp2_right_joystick_x, l_gp2_right_joystick_y, upperSpeed, bucketSpeed);
-                set_arm_servos(bucketPos,bucketPos);
+                set_arm_motors(l_gp2_right_joystick_x/10, l_gp2_right_joystick_y/10, upperSpeed, bucketSpeed);
+                set_arm_servo(bucketPos);
                 //set_arm_servos
                 update_telemetry();
                 telemetry.addData("10", "GP1 Left: " + l_gp1_left_trigger);

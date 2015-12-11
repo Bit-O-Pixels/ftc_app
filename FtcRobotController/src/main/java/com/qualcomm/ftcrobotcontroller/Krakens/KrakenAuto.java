@@ -34,12 +34,12 @@ public class KrakenAuto extends KrakenTelementry
         sensorGyro = hardwareMap.gyroSensor.get("gyro");
         v_state = -1;
         operations = new Object[][]{
-                /*{"forward",2 + (1/3),"ft"},
+                {"forward",2 + (1/3),"ft"},
                 {"left",45},
                 {"forward", 1 + (1/3), "ft"},
                 {"left", 90},
-                {"forward", 2, "ft"}*/
-                {"arm","fullextended"}
+                {"forward", 2, "ft"}
+                //{"arm","fullextended"}
         };
 
     }
@@ -63,9 +63,9 @@ public class KrakenAuto extends KrakenTelementry
                 set_drive_power(0.20,-0.20);
                 if(CurrentStep[2].equals("ft")){
                     if(have_drive_encoders_reached(
-                            Integer.valueOf((String)CurrentStep[1])
+                            Integer.getInteger((String)CurrentStep[1])
                                     *12*encoderInch,
-                            Integer.valueOf((String)CurrentStep[1])
+                            Integer.getInteger((String) CurrentStep[1])
                                     *12*encoderInch)){
                         reset_drive_encoders();
                         if(operations.length-1 >= step+1){
@@ -79,9 +79,10 @@ public class KrakenAuto extends KrakenTelementry
                 }
             }else if(CurrentStep[0].equals("back")){
                 set_drive_power(-0.20,0.20);
-                if(have_drive_encoders_reached(Integer.valueOf((String)CurrentStep[1])
+                if(have_drive_encoders_reached(
+                        Integer.getInteger((String) CurrentStep[1])
                                 *12*encoderInch,
-                        Integer.valueOf((String)CurrentStep[1])
+                        Integer.getInteger((String) CurrentStep[1])
                                 *12*encoderInch)){
                     reset_drive_encoders();
                     if(operations.length-1 >= step+1){

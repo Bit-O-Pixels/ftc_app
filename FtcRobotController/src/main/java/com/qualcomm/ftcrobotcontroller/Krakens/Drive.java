@@ -22,7 +22,7 @@ public class Drive extends KrakenTelementry
 
                 //0.0 1.0
                 // -1.0, 0.0 and 1.0
-                float upperBaseSpeed = 0.2f;
+                float upperBaseSpeed = 0.35f;
                 float upperSpeed = 0.0f;
                 float bucketBaseSpeed = 0.25f;
                 float bucketSpeed = 0.0f;

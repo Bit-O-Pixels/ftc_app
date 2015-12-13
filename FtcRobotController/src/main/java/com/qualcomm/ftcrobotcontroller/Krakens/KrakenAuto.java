@@ -38,17 +38,17 @@ public class KrakenAuto extends KrakenTelementry
                 {"left",45},
                 {"forward", 1 + (1/3), "ft"},
                 {"left", 90},
-                {"forward", 2, "ft"}it*/
+                {"forward", 2, "ft"},*/
                 {"forward",4,"ft"},
                 {"left",45},
                 {"forward",4,"ft"},
                 {"left",45},
                 {"forward",2,"ft"},
-                {"backward",2,"ft"},
+                {"back",2,"ft"},
                 {"right",90},
-                {"backward",3,"ft"},
+                {"back",3,"ft"},
                 {"right",45},
-                {"backward",3.5,"ft"}
+                {"back",3.5,"ft"}
                 //{"arm","fullextended"}
         };
 
@@ -69,9 +69,9 @@ public class KrakenAuto extends KrakenTelementry
             }
             rot = sensorGyro.getHeading();
             Object[] CurrentStep = operations[step];
-            if(CurrentStep[0].equals("forward")){
-                set_drive_power(0.20,-0.20);
-                if(CurrentStep[2].equals("ft")){
+            if(CurrentStep[0].toString().equals("forward")){
+                set_drive_power(0.20,0.20);
+                if(CurrentStep[2].toString().equals("ft")){
                     if(have_drive_encoders_reached(
                             Float.parseFloat(CurrentStep[1].toString())
                                     *12*encoderInch,
@@ -87,8 +87,8 @@ public class KrakenAuto extends KrakenTelementry
                         step++;
                     }
                 }
-            }else if(CurrentStep[0].equals("back")){
-                set_drive_power(-0.20,0.20);
+            }else if(CurrentStep[0].toString().equals("back")){
+                set_drive_power(-0.20,-0.20);
                 if(have_drive_encoders_reached(
                         Float.parseFloat(CurrentStep[1].toString())
                                 *12*encoderInch,
@@ -103,32 +103,33 @@ public class KrakenAuto extends KrakenTelementry
                     set_drive_power(0.0, 0.0);
                     step++;
                 }
-            }else if(CurrentStep[0].equals("left")){
-                set_drive_power(0.05,0.05);
+            }else if(CurrentStep[0].toString().equals("left")){
+                set_drive_power(0.05,-0.05);
                 if(rot >= Float.parseFloat(CurrentStep[1].toString())){
                     reset_drive_encoders();
                     set_drive_power(0.0, 0.0);
                     step++;
                 }
-            }else if(CurrentStep[0].equals("right")){
-                set_drive_power(-0.05,-0.05);
+            }else if(CurrentStep[0].toString().equals("right")){
+                set_drive_power(-0.05,0.05);
                 if(rot >= 360-Float.parseFloat(CurrentStep[1].toString())){
                     reset_drive_encoders();
                     set_drive_power(0.0,0.0);
                     step++;
                 }
-            }else if(CurrentStep[0].equals("arm")){
-                if(CurrentStep[1].equals("fullextended")){
+            }else if(CurrentStep[0].toString().equals("arm")){
+                /*if(CurrentStep[1].equals("fullextended")){
                     set_arm_motors(0.2,0.0);
                     if(have_arm_encoders_reached(0,1440,1440,0)){
                         reset_drive_encoders();
                         set_arm_motors(0.0,0.0);
                         step++;
                     }
-                }
+                }*/
+                step++;
             }
         }
-        telemetry.addData("3","STATE: " + v_state );
+        telemetry.addData("3","step: " + step );
         update_telemetry();
     }
     private int v_state = 0;

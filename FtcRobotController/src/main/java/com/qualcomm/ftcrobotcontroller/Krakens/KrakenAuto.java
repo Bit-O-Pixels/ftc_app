@@ -70,7 +70,7 @@ public class KrakenAuto extends KrakenTelementry
             rot = sensorGyro.getHeading();
             Object[] CurrentStep = operations[step];
             if(CurrentStep[0].toString().equals("forward")){
-                set_drive_power(0.20,0.20);
+                set_drive_power(0.20,0.20);//Let's make sure we're getting here.
                 if(CurrentStep[2].toString().equals("ft")){
                     if(have_drive_encoders_reached(
                             Float.parseFloat(CurrentStep[1].toString())

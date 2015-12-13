@@ -1,5 +1,6 @@
 package com.qualcomm.ftcrobotcontroller.Krakens;
 
+import com.qualcomm.ftccommon.DbgLog;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 
 import java.lang.reflect.Array;
@@ -70,6 +71,7 @@ public class KrakenAuto extends KrakenTelementry
             rot = sensorGyro.getHeading();
             Object[] CurrentStep = operations[step];
             if(CurrentStep[0].toString().equals("forward")){
+                DbgLog.msg("BABYKRAKEN: Got To Forward Command. " + CurrentStep[1].toString());
                 set_drive_power(0.20,0.20);//Let's make sure we're getting here.
                 if(CurrentStep[2].toString().equals("ft")){
                     if(have_drive_encoders_reached(

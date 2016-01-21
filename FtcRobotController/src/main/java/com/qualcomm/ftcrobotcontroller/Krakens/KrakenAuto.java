@@ -54,7 +54,23 @@ public class KrakenAuto extends KrakenTelementry
         };
 
     }
+    private int tet = 0;
     @Override public void loop() {
+        if(tet == 0){
+            reset_drive_encoders();
+            tet++;
+        }
+        if(!have_drive_encoders_reset()){
+            return;
+        }
+        if(Math.abs(v_left_rear_drive.getCurrentPosition()) >  5000){
+            set_drive_power(0.0,0.0);
+            return;
+        }
+        set_drive_power(1.0, 1.0);
+        update_telemetry();
+        telemetry.addData("22", v_left_rear_drive.getCurrentPosition());
+
         float upperBaseSpeed = 0.45f;
         float upperSpeed = 0.0f;
         float bucketBaseSpeed = 0.2f;
@@ -71,7 +87,8 @@ public class KrakenAuto extends KrakenTelementry
             rot = sensorGyro.getHeading();
             Object[] CurrentStep = operations[step];
             if(CurrentStep[0].toString().equals("forward")){
-                DbgLog.error("BABYKRAKEN: Got To Forward Command. " + CurrentStep[1].toString());
+                run_using_encoders();
+                //DbgLog.error("BABYKRAKEN: Got To Forward Command. " + CurrentStep[1].toString());
                 set_drive_power(0.20,0.20);//Let's make sure we're getting here.
                 if(CurrentStep[2].toString().equals("ft")){
                     if(have_drive_encoders_reached(
@@ -90,6 +107,7 @@ public class KrakenAuto extends KrakenTelementry
                     }
                 }
             }else if(CurrentStep[0].toString().equals("back")){
+                run_using_encoders();
                 set_drive_power(-0.20,-0.20);
                 if(have_drive_encoders_reached(
                         Float.parseFloat(CurrentStep[1].toString())
@@ -106,6 +124,7 @@ public class KrakenAuto extends KrakenTelementry
                     step++;
                 }
             }else if(CurrentStep[0].toString().equals("left")){
+                run_using_encoders();
                 set_drive_power(0.05,-0.05);
                 if(rot >= Float.parseFloat(CurrentStep[1].toString())){
                     reset_drive_encoders();
@@ -113,6 +132,7 @@ public class KrakenAuto extends KrakenTelementry
                     step++;
                 }
             }else if(CurrentStep[0].toString().equals("right")){
+                run_using_encoders();// MAMAAAAAAAAAAAAAAAAAAAA oOOOOOOOOOo0000oooo00
                 set_drive_power(-0.05,0.05);
                 if(rot >= 360-Float.parseFloat(CurrentStep[1].toString())){
                     reset_drive_encoders();
@@ -120,14 +140,14 @@ public class KrakenAuto extends KrakenTelementry
                     step++;
                 }
             }else if(CurrentStep[0].toString().equals("arm")){
-                /*if(CurrentStep[1].equals("fullextended")){
+                if(CurrentStep[1].equals("fullextended")){
                     set_arm_motors(0.2,0.0);
                     if(have_arm_encoders_reached(0,1440,1440,0)){
                         reset_drive_encoders();
                         set_arm_motors(0.0,0.0);
                         step++;
                     }
-                }*/
+                }
                 step++;
             }
         }

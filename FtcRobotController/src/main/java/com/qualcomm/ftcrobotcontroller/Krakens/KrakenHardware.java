@@ -130,7 +130,7 @@ public class KrakenHardware extends OpMode
             DbgLog.msg (p_exeception.getLocalizedMessage ());
 
             v_left_rear_drive = null;
-        }
+        }//i fixed it
 
         try
         {
@@ -459,16 +459,24 @@ public class KrakenHardware extends OpMode
         if (v_left_front_drive != null)
         {
             v_left_front_drive.setPower (-p_left_power);
+        }else{
+            DbgLog.error("NULL (front drive left)");
         }
         if(v_left_rear_drive != null) {
             v_left_rear_drive.setPower (-p_left_power);
+        }else{
+            DbgLog.error("NULL (rear drive left)");
         }
         if (v_right_front_drive != null)
         {
             v_right_front_drive.setPower (p_right_power);
+        }else{
+            DbgLog.error("NULL (front drive right)");
         }
         if(v_right_rear_drive != null) {
             v_right_rear_drive.setPower (p_right_power);
+        }else{
+            DbgLog.error("NULL (rear drive right)");
         }
 
     } // set_drive_power
@@ -491,7 +499,9 @@ public class KrakenHardware extends OpMode
         }
 
     }
-
+    /*public DcMotor[] getMotors() {
+        return {v_right_front_drive,v_left_front_drive,v_right_rear_drive,v_left_rear_drive};
+    }
 
     //--------------------------------------------------------------------------
     //
@@ -1118,7 +1128,7 @@ public class KrakenHardware extends OpMode
     /**
      * Manage the aspects of the left drive motor.
      */
-    private DcMotor v_left_front_drive;
+    public DcMotor v_left_front_drive;
 
     //--------------------------------------------------------------------------
     //
@@ -1127,11 +1137,11 @@ public class KrakenHardware extends OpMode
     /**
      * Manage the aspects of the right drive motor.
      */
-    private DcMotor v_right_front_drive;
+    public DcMotor v_right_front_drive;
     /**
      * Manage the aspects of the left drive motor.
      */
-    private DcMotor v_left_rear_drive;
+    public DcMotor v_left_rear_drive;
 
     //--------------------------------------------------------------------------
     //
@@ -1140,7 +1150,7 @@ public class KrakenHardware extends OpMode
     /**
      * Manage the aspects of the right drive motor.
      */
-    private DcMotor v_right_rear_drive;
+    public DcMotor v_right_rear_drive;
 
     //--------------------------------------------------------------------------
     //
@@ -1170,9 +1180,9 @@ public class KrakenHardware extends OpMode
      */
     private Servo v_servo_right_hand;
 
-    private DcMotor v_arm_motor_1;
-    private DcMotor v_arm_motor_2;
-    private DcMotor v_arm_motor_3;
-    private DcMotor v_arm_motor_4;
+    public DcMotor v_arm_motor_1;
+    public DcMotor v_arm_motor_2;
+    public DcMotor v_arm_motor_3;
+    public DcMotor v_arm_motor_4;
 
 } // PushBotHardware

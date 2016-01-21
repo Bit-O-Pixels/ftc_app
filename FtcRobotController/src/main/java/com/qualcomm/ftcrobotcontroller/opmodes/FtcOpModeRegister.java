@@ -33,6 +33,9 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.ftcrobotcontroller.Krakens.Drive;
 import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAuto;
+import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAuto2;
+import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoBlue;
+import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoRed;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 
@@ -65,8 +68,8 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register ("PushBotAuto", PushBotAuto.class);
     //manager.register ("PushBotManual", PushBotManual.class);
     manager.register("Drive!", Drive.class);
-    manager.register("Auto!", KrakenAuto.class);
-    manager.register("Gyro Test Case", MRGyroTest.class);
+    manager.register("AutoBlue!", KrakenAutoBlue.class);
+    manager.register("AutoRed!", KrakenAutoRed.class);
 
 
     /*

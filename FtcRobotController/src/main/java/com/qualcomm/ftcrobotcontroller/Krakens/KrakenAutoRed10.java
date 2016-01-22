@@ -1,10 +1,10 @@
 package com.qualcomm.ftcrobotcontroller.Krakens;
 
-public class KrakenAutoRed extends KrakenTelementry
+public class KrakenAutoRed10 extends KrakenTelementry
 
 {
 
-    public KrakenAutoRed()
+    public KrakenAutoRed10()
 
     {
 
@@ -43,7 +43,11 @@ public class KrakenAutoRed extends KrakenTelementry
         case 0:
 
             reset_drive_encoders ();
+            try {
+                wait(10000);
+            }catch(Exception e){
 
+            }
             v_state++;
 
 

@@ -30,7 +30,7 @@ public class Drive extends KrakenTelementry
                 float upperSpeed = l_gp2_left_joystick_y*0.30f;
                 //float bucketBaseSpeed = 0.2f;
                 float bucketSpeed = l_gp2_right_joystick_y*0.25f;
-/*
+/*//mamaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa OOOoooOoooooooooooooooooooooooooo
                 //Arm Math
                 if(l_gp2_button_a){
                     //down

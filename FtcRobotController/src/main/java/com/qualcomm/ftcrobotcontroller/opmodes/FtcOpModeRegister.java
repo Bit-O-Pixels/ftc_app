@@ -32,10 +32,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.ftcrobotcontroller.Krakens.Drive;
-import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAuto;
-import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAuto2;
-import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoBlue;
+import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoBlue10;
+import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoBlue15;
+import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoBlue5;
 import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoRed;
+import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoBlue;
+import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoRed10;
+import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoRed15;
+import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoRed5;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 
@@ -69,7 +73,13 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register ("PushBotManual", PushBotManual.class);
     manager.register("Drive!", Drive.class);
     manager.register("AutoBlue!", KrakenAutoBlue.class);
+    manager.register("AutoBlue! 5 sec", KrakenAutoBlue5.class);
+    manager.register("AutoBlue! 10 sec", KrakenAutoBlue10.class);
+    manager.register("AutoBlue! 15 sec", KrakenAutoBlue15.class);
     manager.register("AutoRed!", KrakenAutoRed.class);
+    manager.register("AutoRed! 5 sec", KrakenAutoRed5.class);
+    manager.register("AutoRed! 10 sec", KrakenAutoRed10.class);
+    manager.register("AutoRed! 15 sec", KrakenAutoRed15.class);
 
 
     /*

@@ -54,7 +54,7 @@ public class KrakenAutoBlue extends KrakenTelementry
             //
             // Start the drive wheel motors at full power.
             //
-            set_drive_power (0.25f, 0.25f);
+            set_drive_power (-0.25f, -0.25f);
 
             //
             // Have the motor shafts turned the required amount?
@@ -117,7 +117,7 @@ public class KrakenAutoBlue extends KrakenTelementry
         //
         case 5:
             run_using_encoders ();
-            set_drive_power (0.75f, 0.75f);
+            set_drive_power (-0.75f, -0.75f);
             if (have_drive_encoders_reached (8500, 8500))
             {
                 reset_drive_encoders ();
@@ -157,7 +157,7 @@ public class KrakenAutoBlue extends KrakenTelementry
 
             case 9:
                 run_using_encoders ();
-                set_drive_power (0.50f, 0.50f);
+                set_drive_power (-0.25f, -0.25f);
                 if (have_drive_encoders_reached (1100, 1100))
                 {
                     reset_drive_encoders ();

@@ -31,6 +31,7 @@ public class KrakenAutoRed extends KrakenTelementry
         // Reset the motor encoders on the drive wheels.
         //
         reset_drive_encoders ();
+        v_state = 0;
 
     } // start
 
@@ -95,7 +96,7 @@ public class KrakenAutoRed extends KrakenTelementry
         //
         case 3:
             run_using_encoders ();
-            set_drive_power (0.25f, -0.25f);
+            set_drive_power (-0.25f, 0.25f);
             if (have_drive_encoders_reached (1050, 1050))
             {
                 reset_drive_encoders ();
@@ -137,7 +138,7 @@ public class KrakenAutoRed extends KrakenTelementry
 
             case 7:
                 run_using_encoders ();
-                set_drive_power (0.25f, -0.25f);
+                set_drive_power (-0.25f, 0.25f);
                 if (have_drive_encoders_reached (1100, 1100))
                 {
                     reset_drive_encoders ();
@@ -157,8 +158,8 @@ public class KrakenAutoRed extends KrakenTelementry
 
             case 9:
                 run_using_encoders ();
-                set_drive_power (0.50f, 0.50f);
-                if (have_drive_encoders_reached (1100, 1100))
+                set_drive_power (0.25f, 0.25f);
+                if (have_drive_encoders_reached (1608.2, 1608.2))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);

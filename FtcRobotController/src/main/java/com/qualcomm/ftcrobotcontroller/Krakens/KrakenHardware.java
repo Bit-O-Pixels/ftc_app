@@ -83,7 +83,7 @@ public class KrakenHardware extends OpMode
         try
         {
             v_left_front_drive = hardwareMap.dcMotor.get ("left_front_drive");
-            //v_left_front_drive.setDirection(DcMotor.Direction.FORWARD);
+            v_left_front_drive.setDirection(DcMotor.Direction.FORWARD);
         }
         catch (Exception p_exeception)
         {
@@ -96,7 +96,7 @@ public class KrakenHardware extends OpMode
         try
         {
             v_right_front_drive = hardwareMap.dcMotor.get ("right_front_drive");
-            //v_right_front_drive.setDirection(DcMotor.Direction.REVERSE);
+            v_right_front_drive.setDirection(DcMotor.Direction.FORWARD);
         }
         catch (Exception p_exeception)
         {
@@ -109,7 +109,7 @@ public class KrakenHardware extends OpMode
         try
         {
             v_right_rear_drive = hardwareMap.dcMotor.get ("right_rear_drive");
-            //v_left_rear_drive.setDirection(DcMotor.Direction.REVERSE);
+            v_right_rear_drive.setDirection(DcMotor.Direction.FORWARD);
         }
         catch (Exception p_exeception)
         {
@@ -122,7 +122,7 @@ public class KrakenHardware extends OpMode
         try
         {
             v_left_rear_drive = hardwareMap.dcMotor.get ("left_rear_drive");
-            //v_right_rear_drive.setDirection(DcMotor.Direction.REVERSE);
+            v_left_rear_drive.setDirection(DcMotor.Direction.FORWARD);
         }
         catch (Exception p_exeception)
         {

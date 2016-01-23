@@ -1,10 +1,10 @@
 package com.qualcomm.ftcrobotcontroller.Krakens;
 
-public class KrakenAutoBlue extends KrakenTelementry
+public class KrakenAutoRMtn2 extends KrakenTelementry
 
 {
 
-    public KrakenAutoBlue()
+    public KrakenAutoRMtn2()
 
     {
 
@@ -31,7 +31,6 @@ public class KrakenAutoBlue extends KrakenTelementry
         // Reset the motor encoders on the drive wheels.
         //
         reset_drive_encoders ();
-        v_state = 0;
 
     } // start
 
@@ -63,7 +62,7 @@ public class KrakenAutoBlue extends KrakenTelementry
             // If they haven't, then the op-mode remains in this state (i.e this
             // block will be executed the next time this method is called).
             //
-            if (have_drive_encoders_reached (677.4, 677.4))//1329
+            if (have_drive_encoders_reached (3684.45, 3684.45))//1329
             {
                 //
                 // Reset the encoders to ensure they are at a known good value.
@@ -96,8 +95,8 @@ public class KrakenAutoBlue extends KrakenTelementry
         //
         case 3:
             run_using_encoders ();
-            set_drive_power (0.25f, -0.25f);
-            if (have_drive_encoders_reached (1050, 1050))
+            set_drive_power (-0.25f, 0.25f);
+            if (have_drive_encoders_reached (2100, 2100))
             {
                 reset_drive_encoders ();
                 set_drive_power (0.0f, 0.0f);
@@ -115,11 +114,11 @@ public class KrakenAutoBlue extends KrakenTelementry
             break;
         //
         // Turn right until the encoders exceed the specified values.
-        //
+        //new comment
         case 5:
             run_using_encoders ();
             set_drive_power (0.75f, 0.75f);
-            if (have_drive_encoders_reached (8500, 8500))
+            if (have_drive_encoders_reached (5844.4, 5844.4))
             {
                 reset_drive_encoders ();
                 set_drive_power (0.0f, 0.0f);
@@ -138,7 +137,7 @@ public class KrakenAutoBlue extends KrakenTelementry
 
             case 7:
                 run_using_encoders ();
-                set_drive_power (0.25f, -0.25f);
+                set_drive_power (-0.25f, 0.25f);
                 if (have_drive_encoders_reached (1100, 1100))
                 {
                     reset_drive_encoders ();
@@ -158,8 +157,8 @@ public class KrakenAutoBlue extends KrakenTelementry
 
             case 9:
                 run_using_encoders ();
-                set_drive_power (0.25f, 0.25f);
-                if (have_drive_encoders_reached (1100, 1100))
+                set_drive_power (0.50f, 0.50f);
+                if (have_drive_encoders_reached (2541, 2541))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);

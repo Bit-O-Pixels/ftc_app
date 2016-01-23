@@ -43,6 +43,8 @@ import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,6 +65,7 @@ import com.qualcomm.ftccommon.UpdateUI;
 import com.qualcomm.ftcrobotcontroller.opmodes.FtcOpModeRegister;
 import com.qualcomm.hardware.HardwareFactory;
 import com.qualcomm.robotcore.hardware.configuration.Utility;
+import com.qualcomm.robotcore.robot.RobotState;
 import com.qualcomm.robotcore.util.Dimmer;
 import com.qualcomm.robotcore.util.ImmersiveMode;
 import com.qualcomm.robotcore.util.RobotLog;
@@ -131,6 +134,7 @@ public class FtcRobotControllerActivity extends Activity {
       // a new USB device has been attached
       DbgLog.msg("USB Device attached; app restart may be needed");
     }
+    //robot
   }
 
   @Override
@@ -168,12 +172,44 @@ public class FtcRobotControllerActivity extends Activity {
         textGamepad, textOpMode, textErrorMessage, textDeviceName);
     callback = updateUI.new Callback();
 
+
     PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
     preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
     hittingMenuButtonBrightensScreen();
 
     if (USE_DEVICE_EMULATION) { HardwareFactory.enableDeviceEmulation(); }
+    /*
+      KRAKEN ANTI-CRASH
+     */
+    textRobotStatus.addTextChangedListener(new TextWatcher() {
+      @Override
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+      }
+
+      @Override
+      public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (s.toString().contains("failed to start robot")||s.toString().contains("EMERGENCY STOP")) {
+          //DbgLog.error("\"" + textErrorMessage.getText().toString() + "\"");
+          //textErrorMessage.setText("KrakenRestartJam");
+          //requestRobotRestart();
+          //requestRobotShutdown();
+          //super.
+          //requestRobotRestart();
+          requestRobotRestart();
+
+        }
+      }
+
+      @Override
+      public void afterTextChanged(Editable s) {
+
+      }
+    });
+    /*
+     end kraken
+     */
   }
 
   @Override
@@ -189,6 +225,8 @@ public class FtcRobotControllerActivity extends Activity {
     utility.updateHeader(Utility.NO_FILE, R.string.pref_hardware_config_filename, R.id.active_filename, R.id.included_header);
 
     callback.wifiDirectUpdate(WifiDirectAssistant.Event.DISCONNECTED);
+    //callback.
+
 
     entireScreenLayout.setOnTouchListener(new View.OnTouchListener() {
       @Override
@@ -198,7 +236,10 @@ public class FtcRobotControllerActivity extends Activity {
       }
     });
 
+
+
   }
+
 
   @Override
   protected void onResume() {
@@ -217,6 +258,8 @@ public class FtcRobotControllerActivity extends Activity {
     if (controllerService != null) unbindService(connection);
 
     RobotLog.cancelWriteLogcatToDisk(this);
+    //DbgLog.error("onStop fired!");
+
   }
 
   @Override
@@ -372,6 +415,7 @@ public class FtcRobotControllerActivity extends Activity {
       });
     }
   }
+
 
   public void showToast(final Toast toast) {
     runOnUiThread(new Runnable() {

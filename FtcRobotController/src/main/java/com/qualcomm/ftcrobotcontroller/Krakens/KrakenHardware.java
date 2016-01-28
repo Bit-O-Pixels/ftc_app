@@ -556,6 +556,30 @@ public class KrakenHardware extends OpMode
         //
         run_using_left_drive_encoder ();
         run_using_right_drive_encoder ();
+        if (v_right_rear_drive != null)
+        {
+            v_right_rear_drive.setChannelMode
+                    ( DcMotorController.RunMode.RUN_USING_ENCODERS
+                    );
+        }
+        if (v_left_rear_drive != null)
+        {
+            v_left_rear_drive.setChannelMode
+                    ( DcMotorController.RunMode.RUN_USING_ENCODERS
+                    );
+        }
+        if (v_arm_motor_3 != null)
+        {
+            v_arm_motor_3.setChannelMode
+                    ( DcMotorController.RunMode.RUN_USING_ENCODERS
+                    );
+        }
+        if (v_arm_motor_4 != null)
+        {
+            v_arm_motor_4.setChannelMode
+                    ( DcMotorController.RunMode.RUN_USING_ENCODERS
+                    );
+        }
 
     } // run_using_encoders
 
@@ -676,7 +700,30 @@ public class KrakenHardware extends OpMode
         //
         reset_left_drive_encoder ();
         reset_right_drive_encoder ();
-
+        if (v_right_front_drive != null)
+        {
+            v_right_front_drive.setChannelMode
+                    ( DcMotorController.RunMode.RESET_ENCODERS
+                    );
+        }
+        if (v_left_front_drive != null)
+        {
+            v_left_front_drive.setChannelMode
+                    ( DcMotorController.RunMode.RESET_ENCODERS
+                    );
+        }
+        if (v_arm_motor_3 != null)
+        {
+            v_arm_motor_3.setChannelMode
+                    ( DcMotorController.RunMode.RESET_ENCODERS
+                    );
+        }
+        if (v_arm_motor_4 != null)
+        {
+            v_arm_motor_4.setChannelMode
+                    ( DcMotorController.RunMode.RESET_ENCODERS
+                    );
+        }
     } // reset_drive_encoders
 
     //--------------------------------------------------------------------------
@@ -1088,10 +1135,8 @@ public class KrakenHardware extends OpMode
         v_arm_motor_4.setPower(four);
     }
 
-    boolean have_arm_encoders_reached(double pos1, double pos2, double pos3, double pos4){
-        return Math.abs(v_arm_motor_1.getCurrentPosition()) >= pos1&&
-                Math.abs(v_arm_motor_2.getCurrentPosition()) >= pos2&&
-                Math.abs(v_arm_motor_3.getCurrentPosition()) >= pos3&&
+    boolean have_arm_encoders_reached(double pos3, double pos4){
+        return Math.abs(v_arm_motor_3.getCurrentPosition()) >= pos3&&
                 Math.abs(v_arm_motor_4.getCurrentPosition()) >= pos4;
     }
 

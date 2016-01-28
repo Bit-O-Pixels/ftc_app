@@ -3,6 +3,7 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.ftcrobotcontroller.Krakens.Drive;
+import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoArmTest;
 import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoBMtn1;
 import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoBMtn2;
 import com.qualcomm.ftcrobotcontroller.Krakens.KrakenAutoRMtn1;
@@ -34,5 +35,6 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("AutoRMtn2", KrakenAutoRMtn2.class);
     manager.register("AutoBMtn1", KrakenAutoBMtn1.class);
     manager.register("AutoBMtn2", KrakenAutoBMtn2.class);
+    manager.register("AutoArmTest", KrakenAutoArmTest.class);
   }
 }

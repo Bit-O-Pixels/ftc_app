@@ -29,7 +29,7 @@ public class Drive extends KrakenTelementry
                 //float upperBaseSpeed = 0.25f;
                 float upperSpeed = l_gp2_left_joystick_y*0.30f;
                 //float bucketBaseSpeed = 0.2f;
-                float bucketSpeed = l_gp2_right_joystick_y*0.25f;
+                float bucketSpeed = l_gp2_right_joystick_y*0.375f;
 /*//mamaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa OOOoooOoooooooooooooooooooooooooo
                 //Arm Math
                 if(l_gp2_button_a){
@@ -56,7 +56,7 @@ public class Drive extends KrakenTelementry
                 double left_speed = Math.min(1.0, Math.max(-1.0, (speed + l_gp1_left_joystick)));
                 double right_speed = Math.min(1.0, Math.max(-1.0, (speed - l_gp1_left_joystick)));
 
-                set_drive_power(left_speed, right_speed);
+                set_drive_power(left_speed*0.75, right_speed*0.75);
                 //bottom-x, bottom-y, upper-y, bucket-y
                 set_arm_motors(upperSpeed, bucketSpeed);
                 //set_arm_servo(bucketPos);

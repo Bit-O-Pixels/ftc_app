@@ -142,11 +142,11 @@ public class KrakenAuto extends KrakenTelementry
             }else if(CurrentStep[0].toString().equals("arm")){
                 if(CurrentStep[1].equals("fullextended")){
                     set_arm_motors(0.2,0.0);
-                    if(have_arm_encoders_reached(0,1440,1440,0)){
+                    /*if(have_arm_encoders_reached(0,1440,1440,0)){
                         reset_drive_encoders();
                         set_arm_motors(0.0,0.0);
                         step++;
-                    }
+                    }*/
                 }
                 step++;
             }

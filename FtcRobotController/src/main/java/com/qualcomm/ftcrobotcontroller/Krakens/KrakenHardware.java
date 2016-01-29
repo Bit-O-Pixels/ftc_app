@@ -35,6 +35,8 @@ public class KrakenHardware extends OpMode
      *
      * The system calls this member when the class is instantiated.
      */
+    public int TURN_45 = 700;
+    public double TURN_90 = 1438.6;
     public KrakenHardware()
 
     {
@@ -700,15 +702,15 @@ public class KrakenHardware extends OpMode
         //
         reset_left_drive_encoder ();
         reset_right_drive_encoder ();
-        if (v_right_front_drive != null)
+        if (v_right_rear_drive != null)
         {
-            v_right_front_drive.setChannelMode
+            v_right_rear_drive.setChannelMode
                     ( DcMotorController.RunMode.RESET_ENCODERS
                     );
         }
-        if (v_left_front_drive != null)
+        if (v_left_rear_drive != null)
         {
-            v_left_front_drive.setChannelMode
+            v_left_rear_drive.setChannelMode
                     ( DcMotorController.RunMode.RESET_ENCODERS
                     );
         }
@@ -1023,7 +1025,11 @@ public class KrakenHardware extends OpMode
         //
         // Have the encoders reached zero?
         //
-        if (has_left_drive_encoder_reset () && has_right_drive_encoder_reset ())
+        if (has_left_drive_encoder_reset () && has_right_drive_encoder_reset ()
+                &&v_left_rear_drive.getCurrentPosition() == 0
+                &&v_right_rear_drive.getCurrentPosition() == 0
+                &&v_arm_motor_3.getCurrentPosition() == 0
+                &&v_arm_motor_4.getCurrentPosition() == 0)
         {
             //
             // Set the status to a positive indication.

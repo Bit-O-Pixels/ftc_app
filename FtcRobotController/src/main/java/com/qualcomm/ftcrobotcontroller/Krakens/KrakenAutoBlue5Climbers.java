@@ -1,12 +1,12 @@
 package com.qualcomm.ftcrobotcontroller.Krakens;
 
-import com.qualcomm.robotcore.hardware.GyroSensor;
+import java.util.Date;
 
-public class KrakenAutoRedGyroTest extends KrakenTelementry
+public class KrakenAutoBlue5Climbers extends KrakenTelementry
 
 {
 
-    public KrakenAutoRedGyroTest()
+    public KrakenAutoBlue5Climbers()
 
     {
 
@@ -21,11 +21,6 @@ public class KrakenAutoRedGyroTest extends KrakenTelementry
      *
      * The system calls this member once when the OpMode is enabled.
      */
-    private boolean LEFT = false;
-    private boolean RIGHT = true;
-
-    private GyroSensor sensorGyro;
-    private int heading = 0;
     @Override public void start ()
 
     {
@@ -38,31 +33,22 @@ public class KrakenAutoRedGyroTest extends KrakenTelementry
         // Reset the motor encoders on the drive wheels.
         //
         reset_drive_encoders ();
+        lastNow = -1;
         v_state = 0;
-        heading = 0;
-        // write some device information (connection info, name and type)
-        // to the log file.
-        hardwareMap.logDevices();
-
-        // get a reference to our GyroSensor object.
-        sensorGyro = hardwareMap.gyroSensor.get("gyro");
-        /*
-            if(sensorGyro.getHeading() > [90/45]){
-                stop motors
-                move on
-            }
-        */
-
-
-        // calibrate the gyro.
-        sensorGyro.calibrate();//
 
     } // start
-
+    private long lastNow = -1;
     @Override public void loop ()
 
     {
-        if(sensorGyro.isCalibrating()){
+        if(lastNow == -1){
+            Date date = new Date();
+            lastNow = date.getTime();
+        }
+        Date current = new Date();
+        telemetry.addData("99", current.getTime() - lastNow);
+        telemetry.addData("100", lastNow);
+        if(current.getTime()-lastNow < 5000) {
             return;
         }
         switch (v_state)
@@ -105,7 +91,6 @@ public class KrakenAutoRedGyroTest extends KrakenTelementry
                 // Transition to the next state when this method is called
                 // again.
                 //
-
                 v_state++;
             }
             break;
@@ -122,9 +107,8 @@ public class KrakenAutoRedGyroTest extends KrakenTelementry
         // Turn left until the encoders exceed the specified values.
         //
         case 3:
-            run_using_encoders();
-            set_drive_power(-0.25f, 0.25f);
-
+            run_using_encoders ();
+            set_drive_power (0.25f, -0.25f);
             if (have_drive_encoders_reached (1050, 1050))
             {
                 reset_drive_encoders ();
@@ -146,7 +130,7 @@ public class KrakenAutoRedGyroTest extends KrakenTelementry
         //
         case 5:
             run_using_encoders ();
-            set_drive_power (0.75f, 0.75f);
+            set_drive_power (0.5f, 0.5f);
             if (have_drive_encoders_reached (8500, 8500))
             {
                 reset_drive_encoders ();
@@ -166,7 +150,7 @@ public class KrakenAutoRedGyroTest extends KrakenTelementry
 
             case 7:
                 run_using_encoders ();
-                set_drive_power (-0.25f, 0.25f);
+                set_drive_power (0.25f, -0.25f);
                 if (have_drive_encoders_reached (1100, 1100))
                 {
                     reset_drive_encoders ();
@@ -187,7 +171,7 @@ public class KrakenAutoRedGyroTest extends KrakenTelementry
             case 9:
                 run_using_encoders ();
                 set_drive_power (0.25f, 0.25f);
-                if (have_drive_encoders_reached (1608.2, 1608.2))
+                if (have_drive_encoders_reached (1100, 1100))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);
@@ -201,6 +185,70 @@ public class KrakenAutoRedGyroTest extends KrakenTelementry
                 if (have_drive_encoders_reset ())
                 {
                     v_state++;
+                }
+                break;
+            case 11:
+
+                run_using_encoders ();
+
+                //
+                // Start the drive wheel motors at full power.
+                set_arm_motors(0.2f, 0f);
+                //set_drive_power (0.25f, 0.25f);
+                if (have_arm_encoders_reached(400 , 0)){
+                    //
+                    // Reset the encoders to ensure they are at a known good value.
+                    //
+                    reset_drive_encoders ();
+
+                    //
+                    // Stop the motors.
+                    //
+                    set_arm_motors (0.0f, 0.0f);
+
+                    //
+                    // Transition to the next state when this method is called
+                    // again.
+                    //
+                    v_state++;
+                }
+                break;
+            case 12:
+
+                if (have_drive_encoders_reset ())
+                {
+                    v_state++;
+                }
+
+                //v_state++;
+
+
+            case 13:
+
+                run_using_encoders ();
+
+                //
+                // Start the drive wheel motors at full power.
+                set_arm_motors(0f, -0.15f);
+                //set_drive_power (0.25f, 0.25f);
+                if (have_arm_encoders_reached(0 , 150)){
+                    //
+                    // Reset the encoders to ensure they are at a known good value.
+                    //
+                    reset_drive_encoders ();
+
+                    //
+                    // Stop the motors.
+                    //
+                    set_arm_motors (0.0f, 0.0f);
+
+                    //
+                    // Transition to the next state when this method is called
+                    // again.
+                    //
+
+                    v_state++;
+
                 }
                 break;
         //
@@ -218,23 +266,11 @@ public class KrakenAutoRedGyroTest extends KrakenTelementry
         //
         // Send telemetry data to the driver station.
         //
-        update_telemetry (); // Update common telemetry
+        update_telemetry(); // Update common telemetry
         telemetry.addData ("18", "State: " + v_state);
 
     } // loop
-    private void updateHeading() {
 
-    }
-    private void resetHeading() {
-        //sensorGyro.reset
-    }
-   // private boolean hasHeadingReached(boolean direction, int angle){
-    //    if(direction == LEFT){
-     //       return heading <= 360-angle;
-     //   }else if(direction == RIGHT){
-     //       return heading >= angle;
-     //   }
-  //  }
     //--------------------------------------------------------------------------
     //
     // v_state

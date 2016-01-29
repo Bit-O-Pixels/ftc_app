@@ -2,11 +2,11 @@ package com.qualcomm.ftcrobotcontroller.Krakens;
 
 import java.util.Date;
 
-public class KrakenAutoRed10 extends KrakenTelementry
+public class KrakenAutoRed15Climbers extends KrakenTelementry
 
 {
 
-    public KrakenAutoRed10()
+    public KrakenAutoRed15Climbers()
 
     {
 
@@ -48,7 +48,7 @@ public class KrakenAutoRed10 extends KrakenTelementry
         Date current = new Date();
         telemetry.addData("99", current.getTime() - lastNow);
         telemetry.addData("100", lastNow);
-        if(current.getTime()-lastNow < 10000) {
+        if(current.getTime()-lastNow < 15000) {
             return;
         }
         switch (v_state)
@@ -187,6 +187,7 @@ public class KrakenAutoRed10 extends KrakenTelementry
                     v_state++;
                 }
                 break;
+
             //
             // Perform no action - stay in this case until the OpMode is stopped.
             // This method will still be called regardless of the state machine.

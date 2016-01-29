@@ -118,7 +118,7 @@ public class KrakenAutoRMtn2 extends KrakenTelementry
         case 5:
             run_using_encoders ();
             set_drive_power (0.75f, 0.75f);
-            if (have_drive_encoders_reached (5844.4, 5844.4))
+            if (have_drive_encoders_reached (6099, 6099))
             {
                 reset_drive_encoders ();
                 set_drive_power (0.0f, 0.0f);
@@ -158,7 +158,7 @@ public class KrakenAutoRMtn2 extends KrakenTelementry
             case 9:
                 run_using_encoders ();
                 set_drive_power (0.50f, 0.50f);
-                if (have_drive_encoders_reached (2541, 2541))
+                if (have_drive_encoders_reached (1016.5, 1016.5))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);

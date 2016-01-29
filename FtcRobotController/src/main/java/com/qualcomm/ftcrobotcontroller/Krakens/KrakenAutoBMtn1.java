@@ -117,8 +117,8 @@ public class KrakenAutoBMtn1 extends KrakenTelementry
         //
         case 5:
             run_using_encoders ();
-            set_drive_power (0.75f, 0.75f);
-            if (have_drive_encoders_reached (4827.9, 4827.9))
+            set_drive_power (0.5f, 0.5f);
+            if (have_drive_encoders_reached (4066, 4066))
             {
                 reset_drive_encoders ();
                 set_drive_power (0.0f, 0.0f);

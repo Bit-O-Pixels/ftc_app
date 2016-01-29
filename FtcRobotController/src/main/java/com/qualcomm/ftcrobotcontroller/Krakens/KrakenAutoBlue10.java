@@ -130,7 +130,7 @@ public class KrakenAutoBlue10 extends KrakenTelementry
         //
         case 5:
             run_using_encoders ();
-            set_drive_power (0.75f, 0.75f);
+            set_drive_power (0.5f, 0.5f);
             if (have_drive_encoders_reached (8500, 8500))
             {
                 reset_drive_encoders ();

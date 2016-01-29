@@ -97,7 +97,7 @@ public class KrakenAutoBlue extends KrakenTelementry
         case 3:
             run_using_encoders ();
             set_drive_power (0.25f, -0.25f);
-            if (have_drive_encoders_reached (1050, 1050))
+            if (have_drive_encoders_reached (TURN_45, TURN_45))
             {
                 reset_drive_encoders ();
                 set_drive_power (0.0f, 0.0f);
@@ -118,7 +118,7 @@ public class KrakenAutoBlue extends KrakenTelementry
         //
         case 5:
             run_using_encoders ();
-            set_drive_power (0.75f, 0.75f);
+            set_drive_power (0.5f, 0.5f);
             if (have_drive_encoders_reached (8500, 8500))
             {
                 reset_drive_encoders ();
@@ -139,7 +139,7 @@ public class KrakenAutoBlue extends KrakenTelementry
             case 7:
                 run_using_encoders ();
                 set_drive_power (0.25f, -0.25f);
-                if (have_drive_encoders_reached (1100, 1100))
+                if (have_drive_encoders_reached (TURN_45, TURN_45))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);
@@ -175,6 +175,71 @@ public class KrakenAutoBlue extends KrakenTelementry
                     v_state++;
                 }
                 break;
+            case 11:
+
+                run_using_encoders ();
+
+                //
+                // Start the drive wheel motors at full power.
+                set_arm_motors(0.2f, 0f);
+                //set_drive_power (0.25f, 0.25f);
+                if (have_arm_encoders_reached(400 , 0)){
+                    //
+                    // Reset the encoders to ensure they are at a known good value.
+                    //
+                    reset_drive_encoders ();
+
+                    //
+                    // Stop the motors.
+                    //
+                    set_arm_motors (0.0f, 0.0f);
+
+                    //
+                    // Transition to the next state when this method is called
+                    // again.
+                    //
+                    v_state++;
+                }
+                break;
+            case 12:
+
+                if (have_drive_encoders_reset ())
+                {
+                    v_state++;
+                }
+
+                //v_state++;
+
+
+            case 13:
+
+                run_using_encoders ();
+
+                //
+                // Start the drive wheel motors at full power.
+                set_arm_motors(0f, -0.15f);
+                //set_drive_power (0.25f, 0.25f);
+                if (have_arm_encoders_reached(0 , 150)){
+                    //
+                    // Reset the encoders to ensure they are at a known good value.
+                    //
+                    reset_drive_encoders ();
+
+                    //
+                    // Stop the motors.
+                    //
+                    set_arm_motors (0.0f, 0.0f);
+
+                    //
+                    // Transition to the next state when this method is called
+                    // again.
+                    //
+
+                    v_state++;
+
+                }
+                break;
+
         //
         // Perform no action - stay in this case until the OpMode is stopped.
         // This method will still be called regardless of the state machine.

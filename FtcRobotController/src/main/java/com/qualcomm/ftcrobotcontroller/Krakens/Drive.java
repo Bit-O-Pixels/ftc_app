@@ -13,13 +13,18 @@ public class Drive extends KrakenTelementry
                 float l_gp2_left_trigger = gamepad2.left_trigger;
                 float l_gp2_right_joystick_y = gamepad2.right_stick_y;
                 float l_gp2_left_joystick_y = gamepad2.left_stick_y;
-                boolean l_gp2_button_b = gamepad2.b; //upper up
-                boolean l_gp2_button_a = gamepad2.a; //upper down
-                //y,x
-                boolean l_gp2_button_y = gamepad2.y;//up
-                boolean l_gp2_button_x = gamepad2.x;//down
-                boolean l_gp2_dpad_up = gamepad2.dpad_up; //upper up
-                boolean l_gp2_dpad_down = gamepad2.dpad_down; //upper down
+                float upperBin = 0;
+                float lowerBin = 0;
+                if(gamepad2.dpad_up){
+                        upperBin = -1;
+                }else if(gamepad2.dpad_down){
+                        upperBin = 1;
+                }
+                if(gamepad2.a){
+                        lowerBin = -1;
+                }else if(gamepad2.b){
+                        lowerBin = 1;
+                }
 
                 float speed = l_gp1_right_trigger - l_gp1_left_trigger;
 
@@ -27,10 +32,10 @@ public class Drive extends KrakenTelementry
                 //0.0 1.0
                 // -1.0, 0.0 and 1.0
                 //float upperBaseSpeed = 0.25f;
-                float upperSpeed = l_gp2_left_joystick_y*0.30f;
+                float upperSpeed = upperBin*0.25f;
                 //float bucketBaseSpeed = 0.2f;
-                float bucketSpeed = l_gp2_right_joystick_y*0.375f;
-/*//mamaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa OOOoooOoooooooooooooooooooooooooo
+                float bucketSpeed = lowerBin*0.25f;
+                /*//mamaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa OOOoooOoooooooooooooooooooooooooo
                 //Arm Math
                 if(l_gp2_button_a){
                     //down
@@ -51,6 +56,11 @@ public class Drive extends KrakenTelementry
                     bucketSpeed = -bucketBaseSpeed;
                 }
                 double bucketPos = 0.5 - (l_gp2_left_trigger/2);*/
+                //Arm Buttons
+
+
+
+
 
                 //Drive Math
                 double left_speed = Math.min(1.0, Math.max(-1.0, (speed + l_gp1_left_joystick)));

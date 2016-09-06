@@ -109,7 +109,7 @@ public class KrakenAutoRed5Climbers extends KrakenTelementry
             case 3:
                 run_using_encoders ();
                 set_drive_power (-0.25f, 0.25f);
-                if (have_drive_encoders_reached (1050, 1050))
+                if (have_drive_encoders_reached (TURN_45, TURN_45))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);
@@ -131,7 +131,7 @@ public class KrakenAutoRed5Climbers extends KrakenTelementry
             case 5:
                 run_using_encoders ();
                 set_drive_power (0.5f, 0.5f);
-                if (have_drive_encoders_reached (8500, 8500))
+                if (have_drive_encoders_reached (7575.9, 7575.9 ))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);
@@ -151,7 +151,7 @@ public class KrakenAutoRed5Climbers extends KrakenTelementry
             case 7:
                 run_using_encoders ();
                 set_drive_power (-0.25f, 0.25f);
-                if (have_drive_encoders_reached (1100, 1100))
+                if (have_drive_encoders_reached (TURN_45, TURN_45))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);
@@ -171,7 +171,7 @@ public class KrakenAutoRed5Climbers extends KrakenTelementry
             case 9:
                 run_using_encoders ();
                 set_drive_power (0.25f, 0.25f);
-                if (have_drive_encoders_reached (1100, 1100))
+                if (have_drive_encoders_reached (2494, 2494))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);
@@ -187,15 +187,16 @@ public class KrakenAutoRed5Climbers extends KrakenTelementry
                     v_state++;
                 }
                 break;
+
             case 11:
 
                 run_using_encoders ();
 
                 //
                 // Start the drive wheel motors at full power.
-                set_arm_motors(0.2f, 0f);
+                set_arm_motors(0.15f, 0f);
                 //set_drive_power (0.25f, 0.25f);
-                if (have_arm_encoders_reached(400 , 0)){
+                if (have_arm_encoders_reached(350 , 0)){
                     //
                     // Reset the encoders to ensure they are at a known good value.
                     //

@@ -40,105 +40,104 @@ public class KrakenAutoBMtn2 extends KrakenTelementry
 
         switch (v_state)
         {
-        case 0:
+            case 0:
 
-            reset_drive_encoders ();
-
-            v_state++;
-
-
-        case 1:
-
-            run_using_encoders ();
-
-            //
-            // Start the drive wheel motors at full power.
-            //
-            set_drive_power (0.25f, 0.25f);
-
-            //
-            // Have the motor shafts turned the required amount?
-            //
-            // If they haven't, then the op-mode remains in this state (i.e this
-            // block will be executed the next time this method is called).
-            //
-            if (have_drive_encoders_reached (3684.45, 3684.45))//1329
-            {
-                //
-                // Reset the encoders to ensure they are at a known good value.
-                //
                 reset_drive_encoders ();
 
-                //
-                // Stop the motors.
-                //
-                set_drive_power (0.0f, 0.0f);
+                v_state++;
+
+
+            case 1:
+
+                run_using_encoders ();
 
                 //
-                // Transition to the next state when this method is called
-                // again.
+                // Start the drive wheel motors at full power.
                 //
-                v_state++;
-            }
-            break;
-        //
-        // Wait...
-        //
-        case 2:
-            if (have_drive_encoders_reset ())
-            {
-                v_state++;
-            }
-            break;
-        //
-        // Turn left until the encoders exceed the specified values.
-        //
-        case 3:
-            run_using_encoders ();
-            set_drive_power (0.25f, -0.25f);
-            if (have_drive_encoders_reached (2100, 2100))
-            {
-                reset_drive_encoders ();
-                set_drive_power (0.0f, 0.0f);
-                v_state++;
-            }
-            break;
-        //
-        // Wait...
-        //
-        case 4:
-            if (have_drive_encoders_reset ())
-            {
-                v_state++;
-            }
-            break;
-        //
-        // Turn right until the encoders exceed the specified values.
-        //new comment
-        case 5:
-            run_using_encoders ();
-            set_drive_power (0.5f, 0.5f);
-            if (have_drive_encoders_reached (6099, 6099))
-            {
-                reset_drive_encoders ();
-                set_drive_power (0.0f, 0.0f);
-                v_state++;
-            }
-            break;
-        //
-        // Wait...
-        //
-        case 6:
-            if (have_drive_encoders_reset ())
-            {
-                v_state++;
-            }
-            break;
+                set_drive_power (0.25f, 0.25f);
 
+                //
+                // Have the motor shafts turned the required amount?
+                //
+                // If they haven't, then the op-mode remains in this state (i.e this
+                // block will be executed the next time this method is called).
+                //
+                if (have_drive_encoders_reached (677.4, 677.4))//1329
+                {
+                    //
+                    // Reset the encoders to ensure they are at a known good value.
+                    //
+                    reset_drive_encoders ();
+
+                    //
+                    // Stop the motors.
+                    //
+                    set_drive_power (0.0f, 0.0f);
+
+                    //
+                    // Transition to the next state when this method is called
+                    // again.
+                    //
+                    v_state++;
+                }
+                break;
+            //
+            // Wait...
+            //
+            case 2:
+                if (have_drive_encoders_reset ())
+                {
+                    v_state++;
+                }
+                break;
+            //
+            // Turn left until the encoders exceed the specified values.
+            //
+            case 3:
+                run_using_encoders ();
+                set_drive_power (0.25f, -0.25f);
+                if (have_drive_encoders_reached (TURN_45, TURN_45))
+                {
+                    reset_drive_encoders ();
+                    set_drive_power (0.0f, 0.0f);
+                    v_state++;
+                }
+                break;
+            //
+            // Wait...
+            //
+            case 4:
+                if (have_drive_encoders_reset ())
+                {
+                    v_state++;
+                }
+                break;
+            //
+            // Turn right until the encoders exceed the specified values.
+            //
+            case 5:
+                run_using_encoders ();
+                set_drive_power (0.5f, 0.5f);
+                if (have_drive_encoders_reached (5590.1+(2*INCH), 5590.1+(2*INCH) ))
+                {
+                    reset_drive_encoders ();
+                    set_drive_power (0.0f, 0.0f);
+                    v_state++;
+                }
+                break;
+            //
+            // Wait...
+            //
+            case 6:
+                if (have_drive_encoders_reset ())
+                {
+                    v_state++;
+                }
+                break;
             case 7:
                 run_using_encoders ();
                 set_drive_power (0.25f, -0.25f);
-                if (have_drive_encoders_reached (1100, 1100))
+                if (have_drive_encoders_reached (TURN_90, TURN_90))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);
@@ -158,7 +157,7 @@ public class KrakenAutoBMtn2 extends KrakenTelementry
             case 9:
                 run_using_encoders ();
                 set_drive_power (0.50f, 0.50f);
-                if (have_drive_encoders_reached (1016.5, 1016.5))
+                if (have_drive_encoders_reached (5082.5, 5082.5))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);

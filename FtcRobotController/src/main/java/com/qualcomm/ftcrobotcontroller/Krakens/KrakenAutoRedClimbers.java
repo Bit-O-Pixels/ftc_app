@@ -119,7 +119,7 @@ public class KrakenAutoRedClimbers extends KrakenTelementry
         case 5:
             run_using_encoders ();
             set_drive_power (0.5f, 0.5f);
-            if (have_drive_encoders_reached (8500, 8500))
+            if (have_drive_encoders_reached (7575.9, 7575.9 ))
             {
                 reset_drive_encoders ();
                 set_drive_power (0.0f, 0.0f);
@@ -159,7 +159,7 @@ public class KrakenAutoRedClimbers extends KrakenTelementry
             case 9:
                 run_using_encoders ();
                 set_drive_power (0.25f, 0.25f);
-                if (have_drive_encoders_reached (TURN_90, TURN_90))
+                if (have_drive_encoders_reached (2325, 2325))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);
@@ -182,9 +182,9 @@ public class KrakenAutoRedClimbers extends KrakenTelementry
 
                 //
                 // Start the drive wheel motors at full power.
-                set_arm_motors(0.2f, 0f);
+                set_arm_motors(0.15f, 0f);
                 //set_drive_power (0.25f, 0.25f);
-                if (have_arm_encoders_reached(400 , 0)){
+                if (have_arm_encoders_reached(350 , 0)){
                     //
                     // Reset the encoders to ensure they are at a known good value.
                     //
@@ -235,7 +235,6 @@ public class KrakenAutoRedClimbers extends KrakenTelementry
                     // Transition to the next state when this method is called
                     // again.
                     //
-
                     v_state++;
 
                 }

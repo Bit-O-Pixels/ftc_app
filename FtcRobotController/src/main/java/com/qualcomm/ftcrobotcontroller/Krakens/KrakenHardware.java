@@ -36,7 +36,9 @@ public class KrakenHardware extends OpMode
      * The system calls this member when the class is instantiated.
      */
     public int TURN_45 = 700;
-    public double TURN_90 = 1438.6;
+    public double TURN_90 = 1350;
+    public double INCH = 84.7;
+    public double FOOT = 1016.5;
     public KrakenHardware()
 
     {
@@ -584,10 +586,17 @@ public class KrakenHardware extends OpMode
         }
 
     } // run_using_encoders
+    public double get_real_arm_encoder() {
+        return v_arm_motor_3.getCurrentPosition();
 
+    }
+    public double get_real_claw_encoder() {
+        return v_arm_motor_4.getCurrentPosition();
+
+    }
     //--------------------------------------------------------------------------
     //
-    // run_without_left_drive_encoder
+    // run_without_left_drive_encoderf
     //
     /**
      * Set the left drive wheel encoder to run, if the mode is appropriate.

@@ -112,7 +112,7 @@ public class KrakenAutoRed5 extends KrakenTelementry
             case 3:
                 run_using_encoders ();
                 set_drive_power (-0.25f, 0.25f);
-                if (have_drive_encoders_reached (1050, 1050))
+                if (have_drive_encoders_reached (TURN_45, TURN_45))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);
@@ -134,7 +134,7 @@ public class KrakenAutoRed5 extends KrakenTelementry
             case 5:
                 run_using_encoders ();
                 set_drive_power (0.5f, 0.5f);
-                if (have_drive_encoders_reached (8500, 8500))
+                if (have_drive_encoders_reached (7575.9, 7575.9 ))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);
@@ -154,7 +154,7 @@ public class KrakenAutoRed5 extends KrakenTelementry
             case 7:
                 run_using_encoders ();
                 set_drive_power (-0.25f, 0.25f);
-                if (have_drive_encoders_reached (1100, 1100))
+                if (have_drive_encoders_reached (TURN_45, TURN_45))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);
@@ -174,7 +174,7 @@ public class KrakenAutoRed5 extends KrakenTelementry
             case 9:
                 run_using_encoders ();
                 set_drive_power (0.25f, 0.25f);
-                if (have_drive_encoders_reached (1100, 1100))
+                if (have_drive_encoders_reached (2494, 2494))
                 {
                     reset_drive_encoders ();
                     set_drive_power (0.0f, 0.0f);
@@ -190,7 +190,6 @@ public class KrakenAutoRed5 extends KrakenTelementry
                     v_state++;
                 }
                 break;
-            //
             // Perform no action - stay in this case until the OpMode is stopped.
             // This method will still be called regardless of the state machine.
             //

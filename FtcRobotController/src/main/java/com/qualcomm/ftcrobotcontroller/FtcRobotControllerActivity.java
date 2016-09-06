@@ -241,12 +241,8 @@ public class FtcRobotControllerActivity extends Activity {
       }
     });
 
-<<<<<<< HEAD
 
-
-=======
     wifiLock.acquire();
->>>>>>> refs/remotes/ftctechnh/master
   }
 
 
@@ -267,13 +263,8 @@ public class FtcRobotControllerActivity extends Activity {
     if (controllerService != null) unbindService(connection);
 
     RobotLog.cancelWriteLogcatToDisk(this);
-<<<<<<< HEAD
-    //DbgLog.error("onStop fired!");
-
-=======
 
     wifiLock.release();
->>>>>>> refs/remotes/ftctechnh/master
   }
 
   @Override
